@@ -1,12 +1,10 @@
-
-# Intended to test apollo.api_manager.doc package
 import unittest2 as unittest
-from apollo.api_manager.handlers.base.base_service import BaseService
-from  apollo.api_manager.doc.raml_builder import build_documentation
+from  ramldoc.raml_builder import build_documentation
+from ramldoc.get_annotation import AnnotatedClass
 import string
 
 # Decorators:
-from apollo.api_manager.doc.annotations import path, description, response, body, responses, queryparameter
+from ramldoc.annotations import path, description, response, body, responses, queryparameter
 
 #Examples:
 # Use this for raml decorators, as well as unit tests!!!1
@@ -323,7 +321,7 @@ companies = {
 
 # Class Definitions:
 @path("companies/")
-class CompanyInvitationRoot(BaseService):
+class CompanyInvitationRoot(AnnotatedClass):
     @description("List all companies")
     @response(200,
               "Successful Result, company objects returned",
@@ -344,7 +342,7 @@ class CompanyInvitationRoot(BaseService):
         pass
 
 @path("companies/{company_uid}/")
-class CompanyInvitationId(BaseService):
+class CompanyInvitationId(AnnotatedClass):
     @description( "Retrieves a specific company")
     @response(200,
               "Successful Result, company object returned",
@@ -355,7 +353,7 @@ class CompanyInvitationId(BaseService):
         pass
 
 @path("registration-requests/")
-class RegistrationService(BaseService):
+class RegistrationService(AnnotatedClass):
 
     @description("Creates a registration")
     @body (registration, registration_example)
@@ -365,7 +363,7 @@ class RegistrationService(BaseService):
         pass
     
 @path("user_invitations/")
-class UserInvitationRoot(BaseService):
+class UserInvitationRoot(AnnotatedClass):
     
     @description("Retrieves a list of pending and expired invitations")
     @response(200,"An array of invitation objects",invitations,invitation_list_example)
@@ -386,7 +384,7 @@ class UserInvitationRoot(BaseService):
         pass
 
 @path("user_invitations/{invitationId}/")
-class UserInvitationId(BaseService):
+class UserInvitationId(AnnotatedClass):
     @description("Retrieve an invitation by id")
     @response(200,
               "A copy of the invitation",
