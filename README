@@ -1,11 +1,4 @@
-# README #
+Use this library to document your django apis with raml (http://raml.org/) it is being developed, with python decorators.
+Note this library also envforces the documented JSON Schema (http://json-schema.org/) to validate input data.  
 
-Django auto raml documentor
-
-# Changes from Original: #
-Changed namespacing
-removed raml_builder.py's __main__ because it referenced the parent project
-
-# TODO: #
-1) Remove from parent project
-2) Setup a thing for pull requests
+See the unit_test for example use.
