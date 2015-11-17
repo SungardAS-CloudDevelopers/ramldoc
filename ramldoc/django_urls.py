@@ -12,7 +12,7 @@ def build_patterns(modules, version):
         # NOTE, the assumption here is that get_path() is an instance of the AnnotationBaseClass:
         url_string += module.get_path_abstract() + r'$'
         url_string = regex.sub(r'{', r'(?P<', url_string)
-        url_string = regex.sub(r'}', r'>[\w.@]+)', url_string)
+        url_string = regex.sub(r'}', r'>[\w\s.@-]+)', url_string)
         url_string = regex.sub('[\?]?[/]?\$$', '/?$', url_string)
         pattern_list.append(url(url_string, module()))
     return patterns('', *pattern_list)
