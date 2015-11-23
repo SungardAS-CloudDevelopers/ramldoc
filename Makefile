@@ -22,7 +22,7 @@ build:
 	$(MKDIR) -p $(ROOT)$(PYTHON_SITE_DIR)
 	cd python; $(PYTHON) setup.py install --root=$(ROOT); rm -rf build ; cd - ;
 
-rpm:build
+buildrpm:build
 	set -x
 	fpm -t rpm --version $(VERSION) --iteration $(ITER) -n ramldoc  --description 'Python module for raml documentation' -s dir -C $(ROOT) usr/
 	rm -rf $(ROOT)
