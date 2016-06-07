@@ -156,23 +156,23 @@ def _parse_modules(modules):
                     body.example = method_pointer._body_auto_doc.get('example')
                     method.body = body
 
-                for response in method_pointer._response_auto_doc:
-                    doc_response = Object()
-                    doc_response.code = response["code"]
-                    doc_response.description = response['description']
-
-                    # does the body have a response?
-                    if response.get('schema') is not None or response.get('example') is not None:
-                        doc_response.body = Object()
-
-                    if response.get('schema') is not None:
-                        doc_response.body.schema = response['schema']
-
-                    if response['example'] is not None:
-                        doc_response.body.example = response['example']
-
-                    method.responses.append(doc_response)
+                if hasattr(method_pointer, '_response_auto_doc'):
+                    for response in method_pointer._response_auto_doc:
+                        doc_response = Object()
+                        doc_response.code = response["code"]
+                        doc_response.description = response['description']
+    
+                        # does the body have a response?
+                        if response.get('schema') is not None or response.get('example') is not None:
+                            doc_response.body = Object()
+    
+                        if response.get('schema') is not None:
+                            doc_response.body.schema = response['schema']
+    
+                        if response['example'] is not None:
+                            doc_response.body.example = response['example']
+    
+                        method.responses.append(doc_response)
                 doc_module.method_list.append(method)
-
         retval.module_list.append(doc_module)
     return retval
